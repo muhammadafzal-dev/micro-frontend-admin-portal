@@ -1,0 +1,30 @@
+{
+  "$schema": "https://openapi.vercel.sh/microfrontends.json",
+  "applications": {
+    "mfe-shell": {
+      "packageName": "@portal/shell",
+      "development": {
+        "local": 3000,
+        "fallback": "mfe-shell.vercel.app"
+      }
+    },
+    "mfe-auth": {
+      "packageName": "@portal/auth",
+      "development": { "local": 3001 },
+      "routing": [{ "paths": ["/auth", "/auth/:path*"] }]
+    },
+    "mfe-dashboard": {
+      "packageName": "@portal/dashboard",
+      "development": { "local": 3002 },
+      "routing": [{ "paths": ["/dashboard", "/dashboard/:path*"] }]
+    },
+    "mfe-settings": {
+      "packageName": "@portal/settings",
+      "development": { "local": 3003 },
+      "routing": [{ "paths": ["/settings", "/settings/:path*"] }]
+    }
+  },
+  "options": {
+    "localProxyPort": 3024
+  }
+}

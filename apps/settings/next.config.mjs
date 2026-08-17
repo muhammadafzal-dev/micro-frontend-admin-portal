@@ -1,9 +1,11 @@
+import { withMicrofrontends } from "@vercel/microfrontends/next/config";
+
+// Child microfrontend serving everything under /settings.
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // This zone owns every path under /settings.
   basePath: "/settings",
   reactStrictMode: true,
   transpilePackages: ["@portal/ui", "@portal/types", "@portal/config"],
 };
 
-export default nextConfig;
+export default withMicrofrontends(nextConfig);
