@@ -12,7 +12,7 @@ A small but production-style **micro-frontend** architecture built with **Next.j
 Multi-Zones**, **TypeScript**, **Turborepo** and **Yarn workspaces** — deployable
 entirely on **Vercel**, with **no backend** and **mock data only**.
 
-**🔗 Live demo: https://mfe-shell-eta.vercel.app** — sign in with
+**🔗 Live demo: https://mfe-demo-admin.vercel.app** — sign in with
 `alice@example.com` or `bob@example.com` (password `password123`).
 
 Four independently developed and deployed apps behave as **one product** on a
@@ -261,7 +261,7 @@ Set **Environment Variables** per project:
   - `SESSION_SECRET` = a strong random string (**identical** in all four, so every
     zone can verify the cookie).
   - `NEXT_PUBLIC_BASE_URL` = the shell's public URL, e.g.
-    `https://mfe-shell-eta.vercel.app` (use `https://`).
+    `https://mfe-demo-admin.vercel.app` (use `https://`).
 - **Shell only** (the host that rewrites):
   - `AUTH_ZONE_URL` = `https://<mfe-auth-url>.vercel.app`
   - `DASHBOARD_ZONE_URL` = `https://<mfe-dashboard-url>.vercel.app`
