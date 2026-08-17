@@ -6,7 +6,10 @@
   "globalPassThroughEnv": [
     "SESSION_SECRET",
     "COOKIE_DOMAIN",
-    "NEXT_PUBLIC_BASE_URL"
+    "NEXT_PUBLIC_BASE_URL",
+    "AUTH_ZONE_URL",
+    "DASHBOARD_ZONE_URL",
+    "SETTINGS_ZONE_URL"
   ],
   "tasks": {
     "build": {

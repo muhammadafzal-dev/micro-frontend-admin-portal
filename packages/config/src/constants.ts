@@ -36,11 +36,11 @@ export const COOKIE_DOMAIN = process.env.COOKIE_DOMAIN ?? "";
  * The single public origin the user actually visits. Used to build absolute
  * URLs for cross-zone server-side redirects (where a relative path would be
  * ambiguously prefixed by a zone's basePath).
- *  - dev:  http://localhost:3024  (the @vercel/microfrontends local proxy)
- *  - prod: https://abc.com        (the production domain of the default app)
+ *  - dev:  http://localhost:3000  (the shell)
+ *  - prod: https://<your-shell-domain>
  */
 export const PUBLIC_BASE_URL =
-  process.env.NEXT_PUBLIC_BASE_URL ?? "http://localhost:3024";
+  process.env.NEXT_PUBLIC_BASE_URL ?? "http://localhost:3000";
 
 /**
  * Canonical app paths. These are ORIGIN-RELATIVE and resolve against the single
