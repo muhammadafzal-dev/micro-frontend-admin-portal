@@ -12,6 +12,9 @@ A small but production-style **micro-frontend** architecture built with **Next.j
 Multi-Zones**, **TypeScript**, **Turborepo** and **Yarn workspaces** — deployable
 entirely on **Vercel**, with **no backend** and **mock data only**.
 
+**🔗 Live demo: https://mfe-shell-eta.vercel.app** — sign in with
+`alice@example.com` or `bob@example.com` (password `password123`).
+
 Four independently developed and deployed apps behave as **one product** on a
 single domain:
 
@@ -229,29 +232,41 @@ domain; the shell rewrites `/auth`, `/dashboard`, `/settings` to each zone.
 > **Recommendation:** Strategy B. It's the easiest to understand and demonstrate on
 > Vercel, and it's the canonical **Next.js Multi-Zones** pattern.
 
+### Note: Vercel's native Microfrontends vs. Multi-Zones rewrites
+
+Vercel has a first-class **Microfrontends** product (a `microfrontends.json` group +
+`@vercel/microfrontends`) that manages routing at the edge. This project was built
+to work with it — **but the Vercel Hobby (free) tier caps a Microfrontends group at
+2 projects**, and this app has 4. So the live demo uses **classic Next.js Multi-Zones
+rewrites** instead: the shell composes the zones via `next.config` rewrites to each
+zone's deployment URL. Same architecture, all four apps stay independently
+deployable, and it runs entirely on the free tier. (On a Pro plan you could swap in
+the native Microfrontends group with no change to the app code.)
+
 ### Step-by-step (Strategy B)
 
 Create **4 Vercel projects** from this one repo (Add New → Project → same repo, set
 **Root Directory** each time):
 
-| Project | Root Directory | Custom domain |
-|---------|----------------|---------------|
-| `mtap-auth` | `apps/auth` | (none — internal) |
-| `mtap-dashboard` | `apps/dashboard` | (none — internal) |
-| `mtap-settings` | `apps/settings` | (none — internal) |
-| `mtap-shell` | `apps/shell` | `abc.com` (your real domain) |
+| Project | Root Directory | Public? |
+|---------|----------------|---------|
+| `mfe-auth` | `apps/auth` | internal |
+| `mfe-dashboard` | `apps/dashboard` | internal |
+| `mfe-settings` | `apps/settings` | internal |
+| `mfe-shell` | `apps/shell` | **yes — this is the URL users visit** |
 
 Set **Environment Variables** per project:
 
 - **All four projects:**
   - `SESSION_SECRET` = a strong random string (**identical** in all four, so every
     zone can verify the cookie).
-  - `NEXT_PUBLIC_BASE_URL` = `https://abc.com` (the public origin).
+  - `NEXT_PUBLIC_BASE_URL` = the shell's public URL, e.g.
+    `https://mfe-shell-eta.vercel.app` (use `https://`).
 - **Shell only** (the host that rewrites):
-  - `AUTH_ZONE_URL` = `https://mtap-auth.vercel.app`
-  - `DASHBOARD_ZONE_URL` = `https://mtap-dashboard.vercel.app`
-  - `SETTINGS_ZONE_URL` = `https://mtap-settings.vercel.app`
-    (use each zone's production Vercel URL, or internal domains).
+  - `AUTH_ZONE_URL` = `https://<mfe-auth-url>.vercel.app`
+  - `DASHBOARD_ZONE_URL` = `https://<mfe-dashboard-url>.vercel.app`
+  - `SETTINGS_ZONE_URL` = `https://<mfe-settings-url>.vercel.app`
+    (each zone's own production Vercel URL).
 - **(Optional, subdomain mode only):** `COOKIE_DOMAIN` = `.example.com`. Leave unset
   for single-domain.
 
