@@ -1,5 +1,13 @@
 # Multi-Tenant Admin Portal — Micro-Frontend Demo
 
+![Next.js](https://img.shields.io/badge/Next.js-16-black?logo=next.js)
+![React](https://img.shields.io/badge/React-19-149eca?logo=react)
+![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178c6?logo=typescript)
+![Turborepo](https://img.shields.io/badge/Turborepo-monorepo-ef4444?logo=turborepo)
+![Yarn](https://img.shields.io/badge/Yarn-workspaces-2c8ebb?logo=yarn)
+![Vercel](https://img.shields.io/badge/Deploy-Vercel-black?logo=vercel)
+![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)
+
 A small but production-style **micro-frontend** architecture built with **Next.js
 Multi-Zones**, **TypeScript**, **Turborepo** and **Yarn workspaces** — deployable
 entirely on **Vercel**, with **no backend** and **mock data only**.
@@ -455,3 +463,45 @@ end-to-end testing, and hard navigations across zone boundaries.
 Strangler-fig: stand up a shell/host, carve out one bounded context into its own
 deployable behind a rewrite, shift traffic, repeat. Extract shared UI/types into
 packages first so both sides stay consistent during the migration.
+
+---
+
+## Tech stack
+
+| Layer | Choice |
+|-------|--------|
+| Framework | Next.js 16 (App Router, Server Actions, Route Handlers) |
+| UI | React 19 |
+| Language | TypeScript (strict) |
+| Monorepo | Turborepo + Yarn workspaces |
+| Composition | Next.js Multi-Zones (path-based, single domain) |
+| Auth | Mock, HMAC-signed HttpOnly cookie (**DEMO ONLY**) |
+| Tests | Vitest |
+| Lint | ESLint (flat config) |
+| Hosting | Vercel (4 independent projects) |
+
+## Scripts
+
+| Command | Does |
+|---------|------|
+| `yarn dev` | Run all four apps (open http://localhost:3000) |
+| `yarn build` | Build every app |
+| `yarn typecheck` | `tsc --noEmit` across all workspaces |
+| `yarn test` | Run Vitest |
+| `yarn lint` | Run ESLint |
+
+## Contributing
+
+Contributions welcome — see [CONTRIBUTING.md](./CONTRIBUTING.md) for setup,
+conventions, and the quality gates (lint / typecheck / test / build).
+
+## Author
+
+**Muhammad Afzal** — [@muhammadafzal-dev](https://github.com/muhammadafzal-dev)
+
+## License
+
+[MIT](./LICENSE) © 2026 Muhammad Afzal
+
+> Reminder: authentication here is **mock / demo only** and must not be used as real
+> production auth.
