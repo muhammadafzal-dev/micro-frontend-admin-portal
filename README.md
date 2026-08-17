@@ -52,6 +52,11 @@ abc.com/settings/*  -> settings    (profile, security)
 - [Architecture diagram](#architecture-diagram)
 - [Interview questions I can answer from this project](#interview-questions-i-can-answer-from-this-project)
 
+> 📚 **Deep dive:** [docs/MICROFRONTEND-CONCEPTS.md](./docs/MICROFRONTEND-CONCEPTS.md)
+> — how this route/path-based approach relates to Vercel's native Microfrontends
+> (same concept) vs. runtime/component composition like Module Federation (a
+> different concept this project intentionally skips).
+
 ---
 
 ## 1. What is a micro-frontend?
