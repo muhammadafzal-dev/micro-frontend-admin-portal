@@ -10,7 +10,7 @@
   },
   "scripts": {
     "typecheck": "tsc --noEmit",
-    "lint": "echo \"(no lint configured for @portal/config)\"",
+    "lint": "eslint .",
     "clean": "rm -rf .turbo",
     "test": "vitest run"
   },
