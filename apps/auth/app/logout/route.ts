@@ -1,5 +1,4 @@
 import { NextResponse } from "next/server";
-import { cookies } from "next/headers";
 import {
   SESSION_COOKIE,
   ROUTES,
@@ -7,15 +6,22 @@ import {
   sessionClearOptions,
 } from "@portal/config";
 
+// Never cache the logout endpoint — it must run (and clear the cookie) every hit.
+export const dynamic = "force-dynamic";
+
 /**
  * /auth/logout — clears the session cookie and returns to the login screen.
  *
- * Implemented as a GET route handler so the sidebar's "Log out" link works as a
- * plain anchor. Trade-off noted: a state-changing GET is convenient for a demo
- * but a production app should use a POST form (+ CSRF token) to log out.
+ * We set the clearing cookie DIRECTLY on the NextResponse we return. Using
+ * `cookies().set()` from next/headers is not reliably applied to a manually
+ * constructed `NextResponse.redirect()` on Vercel's runtime, which would leave
+ * the session intact and bounce the user back to the dashboard.
+ *
+ * Implemented as GET so the sidebar's "Log out" link works as a plain anchor.
+ * Trade-off noted: a production app would prefer a POST form (+ CSRF token).
  */
 export async function GET() {
-  const store = await cookies();
-  store.set(SESSION_COOKIE, "", sessionClearOptions());
-  return NextResponse.redirect(absoluteUrl(ROUTES.login));
+  const res = NextResponse.redirect(absoluteUrl(ROUTES.login));
+  res.cookies.set(SESSION_COOKIE, "", sessionClearOptions());
+  return res;
 }
